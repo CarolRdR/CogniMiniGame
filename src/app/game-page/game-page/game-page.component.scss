@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+html {
+  background-color: #39393f;
+  min-height: 100vh;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.5rem;
+  color: rgb(240, 187, 40);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #7c7ccf;
+  min-height: 100vh;
+}
+
+.game-image-grid {
+  max-width: 90%;
+  max-height: 100%;
+  display: grid;
+  grid-template-columns: 24vw 24vw 24vw 24vw;
+  grid-template-rows: 25vw 25vw 25vw 25vw 25vw;
+
+  &__image {
+    object-fit: cover;
+    width: 100%;
+    height: 100px;
+    max-height: 100%;
+    border-radius: 15px;
+  }
+  &__image:target {
+    border: 3px solid green;
+    opacity: 0.5;
+  }
+}
+
+.button-container {
+  display: flex;
+  align-self: center;
+  padding: 2.5rem;
+  & button {
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    background-color: rgb(240, 187, 40);
+    border: none;
+    font-weight: bold;
+  }
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #333;
+}
+
+#countdown {
+  position: relative;
+  margin: auto;
+  margin-top: 100px;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+}
+
+#countdown-number {
+  color: white;
+  display: inline-block;
+  line-height: 40px;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: white;
+  fill: none;
+  animation: countdown 15s linear infinite forwards;
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
+}

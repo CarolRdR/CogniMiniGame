@@ -1,0 +1,35 @@
+<div class="welcome-container">
+  <h1>Welcome to CogniMiniGame!</h1>
+  <p>"In this mini game, you can choose two words of your choice, as shown below. Afterwards, a grid with images
+    will be shown and you will be asked to select the ones of a kind. But there is a timer, so you will need to be quick
+    to
+    obtain a high score!
+    Good luck!"
+  </p>
+  <div class="welcome-words-choice">
+    <h2>Choose your words</h2>
+    <form [formGroup]="themeForm" class="initial-form" (ngSubmit)="sendInfo()">
+      <input type="text" list="select-words" (input)="selectWords1($event)" placeholder="Write a word"
+        formControlName="theme1">
+      <datalist id="select-words">
+        <option *ngFor="let item of imageList">{{item}}</option>
+      </datalist>
+
+      <input type="text" list="select-words" (input)="selectWords1($event)" placeholder="Write a word"
+        formControlName="theme2">
+      <datalist id="select-words">
+        <option *ngFor="let item of imageList">{{item}}</option>
+      </datalist>
+
+      <div class="button-container">
+        <button class="welcome-words-send">Send</button>
+      </div>
+    </form>
+
+
+  </div>
+
+</div>
+
+
+<!-- (input)="selectWords($event)" -->
