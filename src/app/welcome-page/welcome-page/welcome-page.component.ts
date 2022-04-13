@@ -51,6 +51,7 @@ export class WelcomePageComponent implements OnInit {
   }
 
   sendInfo(): any {
+    this.store.setImage(this.themeForm.value);
     this.store.setImage(this.imageList);
     localStorage.setItem('savedThemes', JSON.stringify(this.themeForm.value));
 
