@@ -12,9 +12,9 @@
   <h1>Select all the images that contain {{themeToShow}}</h1>
 
   <div class="game-image-grid">
-    <div *ngFor="let image of imageList" class="game-image-grid__item">
+    <div *ngFor="let image of imageList | slice:0:16" class="game-image-grid__item">
       <!-- <form [formGroup]="imagesForm"> -->
-      <img type="image" id="image" [alt]="image[1]" [src]="image[0]" class="game-image-grid__image"
+      <img type="image" id="image" [alt]="true ? image[1] : image[2]" [src]="image[0]" class="game-image-grid__image"
         (click)="selectImages($event)">
       <!-- formControlName="images" -->
       <!-- </form> -->

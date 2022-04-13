@@ -35,7 +35,7 @@ h1 {
   max-height: 100%;
   display: grid;
   grid-template-columns: 24vw 24vw 24vw 24vw;
-  grid-template-rows: 25vw 25vw 25vw 25vw 25vw;
+  grid-template-rows: 25vw 25vw 25vw;
 
   &__image {
     object-fit: cover;
@@ -59,6 +59,10 @@ h1 {
     background-color: rgb(240, 187, 40);
     border: none;
     font-weight: bold;
+  }
+  & button:target {
+    border: 3px solid green;
+    opacity: 0.5;
   }
 }
 

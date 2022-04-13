@@ -1,6 +1,7 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { SearchImagesI } from 'src/app/interfaces';
 import { SelectImageService } from 'src/app/services/select-image.service';
@@ -14,11 +15,11 @@ import { StoreService } from 'src/app/services/store.service';
 export class GamePageComponent implements OnInit {
   @Input() themeToShow!: string | undefined;
   imagesForm!: FormGroup;
-  imagesInput!: SearchImagesI;
+  imagesInput!: SearchImagesI[];
   theme1!: string;
   theme2!: string;
-  imageList: string[] = [];
-  images: [];
+  imageList: Array<any>;
+  images: string[] = [];
   inputValue!: string;
   theme: string;
   errorMessage = '';
@@ -29,7 +30,8 @@ export class GamePageComponent implements OnInit {
     public selectImage: SelectImageService,
     public store: StoreService,
     private fb: FormBuilder,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private router: Router
   ) {
     this.imageList = [];
     this.images = [];
@@ -37,25 +39,42 @@ export class GamePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const themes = JSON.parse(localStorage.getItem('savedThemes') || '{}');
+    this.theme1 = themes.theme1;
+    this.theme2 = themes.theme2;
+    this.themeToShow = this.theme1;
+
     this.store.getImage().subscribe({
       next: (data: any) => {
-        this.imageList = data.sort(function () {
-          return Math.random() - 0.5;
-        });
+        console.log(data);
+        this.imageList = data
+          .filter(
+            (item: any) =>
+              item?.[1] === this.theme1 ||
+              item?.[2] === this.theme1 ||
+              item?.[1] === this.theme2 ||
+              item?.[2] === this.theme2
+          )
+          .sort(function () {
+            return Math.random() - 0.5;
+          });
+
+        console.log(this.imageList);
+        return this.imageList;
+        // this.imageList.forEach((item) => {
+        //   console.log(item[1], item[2]);
+        // });
+
+        // console.log(this.imageList);
       },
       error: (error) => {
         this.errorMessage = error;
       },
     });
 
-    const themes = JSON.parse(localStorage.getItem('savedThemes') || '{}');
-    this.theme1 = themes.theme1;
-    this.theme2 = themes.theme2;
-    this.themeToShow = this.theme1;
-
-    this.imagesForm = this.fb.group({
-      images: [''],
-    });
+    // this.imagesForm = this.fb.group({
+    //   images: [''],
+    // });
   }
 
   // startTimer() {
@@ -70,39 +89,34 @@ export class GamePageComponent implements OnInit {
   // }
 
   selectImages(ev: any) {
-    const retrievedInput = ev.target;
-    console.log('what input', retrievedInput);
+    const retrievedInput = ev.target.alt;
+    console.log(retrievedInput);
 
-    this.store.getImage().subscribe((data) => console.log('Este data', data));
-    if (retrievedInput.value === this.themeToShow) {
-      localStorage.setItem('save', retrievedInput.value);
-      console.log(
-        'Igual o no',
-        localStorage.setItem('save', retrievedInput.value)
-      );
-      // this.selectImage.getImages(retrievedInput.value).subscribe(
-      //   (data) =>
-      //     (this.imagesInput = data.filter(
-      //       (item: any) =>
-      //         this.imagesForm.value.some((e: any) => item.id === e.id),
-      //       console.log('que', data)
-      //     ))
-      //   // data === this.themeToShow
-      // );
+    if (
+      retrievedInput === this.themeToShow ||
+      retrievedInput === this.themeToShow
+    ) {
+      return localStorage.setItem('saveTheme', retrievedInput);
     }
-
-    // this.store.getTheme(this.theme);
-
-    // localStorage.setItem(
-    //   'savedThemes',
-    //   JSON.stringify(this.imagesForm.value)
-    // );
-
-    // return this.images;
+    console.log(
+      'Igual o no',
+      localStorage.setItem('saveTheme', retrievedInput)
+    );
   }
+
+  // this.store.getTheme(this.theme);
+
+  // localStorage.setItem(
+  //   'savedThemes',
+  //   JSON.stringify(this.imagesForm.value)
+  // );
+
+  // return this.images;
+
   submit() {
-    const retrievedThemes = this.store.getTheme('savedThemes');
-    return retrievedThemes;
+    this.store.setImage('saveTheme');
+    return this.router.navigate([`score`]);
+
     //  this.store.getImage().subscribe({
     //     this.imagesForm.get("image").setValue()
 

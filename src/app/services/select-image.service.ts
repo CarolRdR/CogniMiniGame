@@ -26,15 +26,15 @@ export class SelectImageService {
   getImages(inputValue: any): Observable<any> {
     const { theme1, theme2 } = inputValue;
 
-    const URL_THEME1 = `https://api.unsplash.com/search/photos?query=${theme1}&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`;
-    const URL_THEME2 = `https://api.unsplash.com/search/photos?query=${theme2}&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`;
+    const URL_THEME1 = `https://api.unsplash.com/search/photos?query=${theme1}&per_page=15&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`;
+    const URL_THEME2 = `https://api.unsplash.com/search/photos?query=${theme2}&per_page=15&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`;
 
     const dataTheme1 = this.http.get(URL_THEME1).pipe(
       map((data: any) => {
         const imageData = data?.results;
 
         return imageData?.map((item: any) => {
-          return [item.urls.small, item.tags[0]?.title];
+          return [item.urls.small, item.tags[0]?.title, item.tags[1]?.title];
         });
       })
     );
@@ -44,11 +44,11 @@ export class SelectImageService {
         const imageData = data?.results;
 
         return imageData?.map((item: any) => {
-          console.log([item.urls.small, item.tags[0]?.title]);
-          return [item.urls.small, item.tags[0]?.title];
+          return [item.urls.small, item.tags[0]?.title, item.tags[1]?.title];
         });
       })
     );
+
     const mergedData = [];
     mergedData.push(dataTheme1);
     mergedData.push(dataTheme2);
