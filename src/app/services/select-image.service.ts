@@ -34,7 +34,7 @@ export class SelectImageService {
         const imageData = data?.results;
 
         return imageData?.map((item: any) => {
-          return item.urls.small;
+          return [item.urls.small, item.tags[0]?.title];
         });
       })
     );
@@ -44,7 +44,8 @@ export class SelectImageService {
         const imageData = data?.results;
 
         return imageData?.map((item: any) => {
-          return item.urls.small;
+          console.log([item.urls.small, item.tags[0]?.title]);
+          return [item.urls.small, item.tags[0]?.title];
         });
       })
     );

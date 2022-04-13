@@ -17,7 +17,6 @@ export class GamePageComponent implements OnInit {
   imagesInput!: SearchImagesI;
   theme1!: string;
   theme2!: string;
-  // themeToShow = this.theme1;
   imageList: string[] = [];
   images: [];
   inputValue!: string;
@@ -53,44 +52,47 @@ export class GamePageComponent implements OnInit {
     this.theme1 = themes.theme1;
     this.theme2 = themes.theme2;
     this.themeToShow = this.theme1;
-    console.log('primer tema', this.theme1);
-    console.log('segundo tema', this.theme2);
 
     this.imagesForm = this.fb.group({
       images: [''],
     });
-
-    // this.store.getImage().subscribe({
-    //   next: (data) => {
-    //     this.imagesInput = data;
-    //     this.imagesForm.get('images')?.setValue(this.imagesInput.urls);
-    //   },
-    // });
   }
 
-  startTimer() {
-    this.interval = setInterval(() => {
-      if (this.timeLeft > 0) {
-        this.timeLeft--;
-        clearInterval(this.interval);
-      } else {
-        this.timeLeft = 60;
-      }
-    }, 1000);
-  }
+  // startTimer() {
+  //   this.interval = setInterval(() => {
+  //     if (this.timeLeft > 0) {
+  //       this.timeLeft--;
+  //       clearInterval(this.interval);
+  //     } else {
+  //       this.timeLeft = 60;
+  //     }
+  //   }, 1000);
+  // }
 
   selectImages(ev: any) {
     const retrievedInput = ev.target;
     console.log('what input', retrievedInput);
-    const retrievedTheme = this.selectImage.getImages(retrievedInput).subscribe(
-      (data) => console.log('que', data)
 
-      // data === this.themeToShow
-    );
+    this.store.getImage().subscribe((data) => console.log('Este data', data));
+    if (retrievedInput.value === this.themeToShow) {
+      localStorage.setItem('save', retrievedInput.value);
+      console.log(
+        'Igual o no',
+        localStorage.setItem('save', retrievedInput.value)
+      );
+      // this.selectImage.getImages(retrievedInput.value).subscribe(
+      //   (data) =>
+      //     (this.imagesInput = data.filter(
+      //       (item: any) =>
+      //         this.imagesForm.value.some((e: any) => item.id === e.id),
+      //       console.log('que', data)
+      //     ))
+      //   // data === this.themeToShow
+      // );
+    }
 
     // this.store.getTheme(this.theme);
 
-    console.log(retrievedTheme);
     // localStorage.setItem(
     //   'savedThemes',
     //   JSON.stringify(this.imagesForm.value)
