@@ -1,15 +1,17 @@
 <div class="game-container">
 
-  <!-- <p>{{timeLeft}} Seconds Left....</p> -->
+  <div class="game-header">
+    <h1>Select all the images that contain {{themeToShow}}</h1>
+  </div>
 
-  <!-- <div id="countdown">
-    <div id="countdown-number"></div>
+  <div id="countdown">
+    <div id="countdown-number">
+      <p>{{counter}}</p>
+    </div>
     <svg>
       <circle r="18" cx="20" cy="20"></circle>
     </svg>
-  </div> -->
-
-  <h1>Select all the images that contain {{themeToShow}}</h1>
+  </div>
 
   <div class="game-image-grid">
     <div *ngFor="let image of imageList | slice:0:16" class="game-image-grid__item">

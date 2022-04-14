@@ -1,9 +1,6 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { SearchImagesI } from 'src/app/interfaces';
 import { SelectImageService } from 'src/app/services/select-image.service';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -14,29 +11,23 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class GamePageComponent implements OnInit {
   @Input() themeToShow!: string | undefined;
-  imagesForm!: FormGroup;
-  imagesInput!: SearchImagesI[];
+
   theme1!: string;
   theme2!: string;
-  imageList: Array<any>;
+  imageList: string[] = [];
   images: string[] = [];
-  inputValue!: string;
-  theme: string;
+  theme: string = '';
   errorMessage = '';
-  timeLeft: number = 12;
-  interval: any;
+  correctImages: string[] = [];
+  incorrectImages: string[] = [];
+  counter: number = 12;
 
   constructor(
     public selectImage: SelectImageService,
     public store: StoreService,
-    private fb: FormBuilder,
     public route: ActivatedRoute,
     private router: Router
-  ) {
-    this.imageList = [];
-    this.images = [];
-    this.theme = '';
-  }
+  ) {}
 
   ngOnInit(): void {
     const themes = JSON.parse(localStorage.getItem('savedThemes') || '{}');
@@ -46,7 +37,6 @@ export class GamePageComponent implements OnInit {
 
     this.store.getImage().subscribe({
       next: (data: any) => {
-        console.log(data);
         this.imageList = data
           .filter(
             (item: any) =>
@@ -58,69 +48,55 @@ export class GamePageComponent implements OnInit {
           .sort(function () {
             return Math.random() - 0.5;
           });
-
-        console.log(this.imageList);
-        return this.imageList;
-        // this.imageList.forEach((item) => {
-        //   console.log(item[1], item[2]);
-        // });
-
-        // console.log(this.imageList);
+        // localStorage.setItem('themeInput1', this.theme1);
+        // localStorage.setItem('themeInput2', this.theme2);
+        // localStorage.getItem('themeInput1');
+        // console.log('cuantos1', localStorage.getItem('themeInput1'));
+        // localStorage.getItem('themeInput2');
+        // console.log('cuantos2', localStorage.getItem('themeInput2'));
+        console.log(this.imageList.slice(0, 16));
+        return this.imageList.slice(0, 16);
       },
       error: (error) => {
         this.errorMessage = error;
       },
     });
 
-    // this.imagesForm = this.fb.group({
-    //   images: [''],
-    // });
+    let interval = setInterval(() => {
+      this.counter = this.counter - 1;
+      console.log(this.counter);
+      if (this.counter === 0) {
+        clearInterval(interval);
+        // this.router.navigate([`score`]);
+      }
+    }, 1000);
   }
-
-  // startTimer() {
-  //   this.interval = setInterval(() => {
-  //     if (this.timeLeft > 0) {
-  //       this.timeLeft--;
-  //       clearInterval(this.interval);
-  //     } else {
-  //       this.timeLeft = 60;
-  //     }
-  //   }, 1000);
-  // }
 
   selectImages(ev: any) {
-    const retrievedInput = ev.target.alt;
+    let retrievedInput = ev.target.alt;
     console.log(retrievedInput);
+    if (retrievedInput === this.themeToShow) {
+      this.correctImages.push(retrievedInput);
 
-    if (
-      retrievedInput === this.themeToShow ||
-      retrievedInput === this.themeToShow
-    ) {
-      return localStorage.setItem('saveTheme', retrievedInput);
+      localStorage.setItem(
+        'correctData',
+        JSON.stringify(this.correctImages.length)
+      );
+    } else if (retrievedInput !== this.themeToShow) {
+      this.incorrectImages.push(retrievedInput);
+
+      localStorage.setItem(
+        'incorrectData',
+        JSON.stringify(this.incorrectImages.length)
+      );
+      localStorage.getItem('incorrectData');
+      console.log('por que hay algo?', localStorage.getItem('incorrectData'));
     }
-    console.log(
-      'Igual o no',
-      localStorage.setItem('saveTheme', retrievedInput)
-    );
   }
 
-  // this.store.getTheme(this.theme);
-
-  // localStorage.setItem(
-  //   'savedThemes',
-  //   JSON.stringify(this.imagesForm.value)
-  // );
-
-  // return this.images;
-
   submit() {
-    this.store.setImage('saveTheme');
-    return this.router.navigate([`score`]);
+    localStorage.setItem('countdown', JSON.stringify(this.counter));
 
-    //  this.store.getImage().subscribe({
-    //     this.imagesForm.get("image").setValue()
-
-    //  }
-    //  );
+    this.router.navigate([`score`]);
   }
 }
