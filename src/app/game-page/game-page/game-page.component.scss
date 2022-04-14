@@ -9,8 +9,22 @@
 html {
   background-color: #39393f;
   min-height: 100vh;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: #7c7ccf;
+  min-height: 100vh;
+}
+.game-header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
 h1 {
   display: flex;
   justify-content: center;
@@ -21,21 +35,19 @@ h1 {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
-
-.game-container {
+.game-countdown {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  background-color: #7c7ccf;
-  min-height: 100vh;
+  text-align: center;
+  color: rgb(240, 187, 40);
+  padding: 1rem;
 }
-
 .game-image-grid {
   max-width: 90%;
   max-height: 100%;
   display: grid;
   grid-template-columns: 24vw 24vw 24vw 24vw;
-  grid-template-rows: 25vw 25vw 25vw 25vw 25vw;
+  grid-template-rows: 25vw 25vw 25vw;
 
   &__image {
     object-fit: cover;
@@ -60,25 +72,24 @@ h1 {
     border: none;
     font-weight: bold;
   }
-}
-
-body {
-  height: 100%;
-  width: 100%;
-  background-color: #333;
+  & button:target {
+    border: 3px solid green;
+    opacity: 0.5;
+  }
 }
 
 #countdown {
   position: relative;
-  margin: auto;
-  margin-top: 100px;
+  align-self: center;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
   height: 40px;
   width: 40px;
   text-align: center;
 }
 
 #countdown-number {
-  color: white;
+  color: rgb(240, 187, 40);
   display: inline-block;
   line-height: 40px;
 }
@@ -97,9 +108,9 @@ svg circle {
   stroke-dashoffset: 0px;
   stroke-linecap: round;
   stroke-width: 2px;
-  stroke: white;
+  stroke: rgb(240, 187, 40);
   fill: none;
-  animation: countdown 15s linear infinite forwards;
+  animation: countdown 12s linear forwards;
 }
 
 @keyframes countdown {
