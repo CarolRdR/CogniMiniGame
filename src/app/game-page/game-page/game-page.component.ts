@@ -18,9 +18,9 @@ export class GamePageComponent implements OnInit {
   images: string[] = [];
   theme: string = '';
   errorMessage = '';
-  correctImages: string[] = [];
-  incorrectImages: string[] = [];
-  counter: number = 12;
+  correctImages: any;
+  incorrectImages: any;
+  counter: any;
 
   constructor(
     public selectImage: SelectImageService,
@@ -38,6 +38,7 @@ export class GamePageComponent implements OnInit {
     this.store.getImage().subscribe({
       next: (data: any) => {
         this.imageList = data
+
           .filter(
             (item: any) =>
               item?.[1] === this.theme1 ||
@@ -47,15 +48,10 @@ export class GamePageComponent implements OnInit {
           )
           .sort(function () {
             return Math.random() - 0.5;
-          });
-        // localStorage.setItem('themeInput1', this.theme1);
-        // localStorage.setItem('themeInput2', this.theme2);
-        // localStorage.getItem('themeInput1');
-        // console.log('cuantos1', localStorage.getItem('themeInput1'));
-        // localStorage.getItem('themeInput2');
-        // console.log('cuantos2', localStorage.getItem('themeInput2'));
-        console.log(this.imageList.slice(0, 16));
-        return this.imageList.slice(0, 16);
+          })
+          .slice(0, 16);
+
+        return this.imageList;
       },
       error: (error) => {
         this.errorMessage = error;
@@ -64,38 +60,29 @@ export class GamePageComponent implements OnInit {
 
     let interval = setInterval(() => {
       this.counter = this.counter - 1;
-      console.log(this.counter);
       if (this.counter === 0) {
         clearInterval(interval);
-        // this.router.navigate([`score`]);
+        this.router.navigate([`score`]);
       }
     }, 1000);
   }
 
   selectImages(ev: any) {
     let retrievedInput = ev.target.alt;
-    console.log(retrievedInput);
+
     if (retrievedInput === this.themeToShow) {
       this.correctImages.push(retrievedInput);
 
-      localStorage.setItem(
-        'correctData',
-        JSON.stringify(this.correctImages.length)
-      );
+      localStorage.setItem('correctData', this.correctImages.length);
     } else if (retrievedInput !== this.themeToShow) {
       this.incorrectImages.push(retrievedInput);
 
-      localStorage.setItem(
-        'incorrectData',
-        JSON.stringify(this.incorrectImages.length)
-      );
-      localStorage.getItem('incorrectData');
-      console.log('por que hay algo?', localStorage.getItem('incorrectData'));
+      localStorage.setItem('incorrectData', this.incorrectImages.length);
     }
   }
 
   submit() {
-    localStorage.setItem('countdown', JSON.stringify(this.counter));
+    localStorage.setItem('countdown', this.counter);
 
     this.router.navigate([`score`]);
   }

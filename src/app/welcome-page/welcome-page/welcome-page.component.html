@@ -22,7 +22,7 @@
       </datalist>
 
       <div class="button-container">
-        <button class="welcome-words-send">Send</button>
+        <button class="welcome-words-send" type="submit" [disabled]="!themeForm.valid">Send</button>
       </div>
     </form>
 

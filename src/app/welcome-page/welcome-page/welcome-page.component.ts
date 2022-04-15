@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SelectImageService } from 'src/app/services/select-image.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -11,6 +11,9 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class WelcomePageComponent implements OnInit {
   @Input() themeToShow!: string | undefined;
+  @Input()
+  required!: boolean | string;
+
   themeForm!: FormGroup;
   imageList: string[] = [];
   errorMessage = '';
@@ -25,8 +28,8 @@ export class WelcomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.themeForm = this.fb.group({
-      theme1: [''],
-      theme2: [''],
+      theme1: ['', [Validators.required]],
+      theme2: ['', [Validators.required]],
     });
   }
 
