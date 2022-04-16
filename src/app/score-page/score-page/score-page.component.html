@@ -1,8 +1,9 @@
-<div class="welcome-container">
+<div class="score-container">
   <h1>Your Score!</h1>
+  <div class="score-points">
+    <p *ngIf="!isTimeUp" class="score-points__points">🏆 Points: {{this.score}}</p>
+  </div>
 
-  <div *ngIf="!isTimeUp">Time´s up! You didn't score this time...</div>
-  <div *ngIf="isTimeUp">Points: {{this.score}}🏆</div>
 
   <div class="button-container">
     <button (click)="playAgain()" class="score-playAgain">Play Again</button>

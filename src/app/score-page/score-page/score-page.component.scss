@@ -11,12 +11,16 @@ html {
   min-height: 100vh;
 }
 
-.welcome-container {
+.score-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  padding-top: 5rem;
+  gap: 3rem;
   background-color: #7c7ccf;
   min-height: 100vh;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 h1 {
@@ -26,22 +30,25 @@ h1 {
   padding: 2rem;
   font-size: 1.5rem;
   color: rgb(240, 187, 40);
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.score-points {
+  font-size: 1.5rem;
 }
 
 .button-container {
   display: flex;
   align-self: center;
   padding: 2.5rem;
+  padding-top: 8rem;
   & button {
     padding: 0.5rem 2rem 0.5rem 2rem;
     background-color: rgb(240, 187, 40);
     border: none;
     font-weight: bold;
   }
-  & button:target {
+  & button:focus {
     border: 3px solid green;
-    opacity: 0.5;
+    opacity: 2;
   }
 }

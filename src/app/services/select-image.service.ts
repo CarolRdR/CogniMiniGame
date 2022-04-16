@@ -26,10 +26,10 @@ export class SelectImageService {
   getImages(inputValue: any): Observable<any> {
     const { theme1, theme2 } = inputValue;
 
-    const URL_THEME1 = `https://api.unsplash.com/search/photos?query=${theme1}&per_page=15&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`;
-    const URL_THEME2 = `https://api.unsplash.com/search/photos?query=${theme2}&per_page=15&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`;
+    const URL_THEME1 = `https://api.unsplash.com/search/photos?query=${theme1}&per_page=15`;
+    const URL_THEME2 = `https://api.unsplash.com/search/photos?query=${theme2}&per_page=15`;
 
-    const dataTheme1 = this.http.get(URL_THEME1).pipe(
+    const dataTheme1 = this.http.get(URL_THEME1, httpOptions).pipe(
       map((data: any) => {
         const imageData = data?.results;
 
@@ -39,7 +39,7 @@ export class SelectImageService {
       })
     );
 
-    const dataTheme2 = this.http.get(URL_THEME2).pipe(
+    const dataTheme2 = this.http.get(URL_THEME2, httpOptions).pipe(
       map((data: any) => {
         const imageData = data?.results;
 
