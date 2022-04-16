@@ -22,11 +22,8 @@ export class ScorePageComponent implements OnInit {
 
   ngOnInit(): any {
     this.dataCorrect = localStorage.getItem('correctData');
-    console.log(this.dataCorrect);
     this.dataIncorrect = localStorage.getItem('incorrectData');
-    console.log(this.dataIncorrect);
     this.timeToAnswer = localStorage.getItem('countdown');
-    console.log(this.timeToAnswer);
 
     this.score =
       (this.dataCorrect - this.dataIncorrect) * this.timeToAnswer * 100;
