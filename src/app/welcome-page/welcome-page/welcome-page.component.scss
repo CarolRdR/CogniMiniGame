@@ -54,10 +54,11 @@ p {
 }
 .button-container {
   padding: 2.5rem;
-  & button {
-    padding: 0.5rem 2rem 0.5rem 2rem;
-    background-color: rgb(240, 187, 40);
-    border: none;
-    font-weight: bold;
-  }
+}
+
+.welcome-words-send {
+  padding: 0.5rem 2rem 0.5rem 2rem;
+  background-color: rgb(240, 187, 40);
+  border: none;
+  font-weight: bold;
 }

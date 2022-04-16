@@ -56,8 +56,10 @@ h1 {
     max-height: 100%;
     border-radius: 15px;
   }
-  &__image:target {
-    border: 3px solid green;
+  &__image:active {
+    display: block;
+    border: 3px solid rgb(240, 187, 40);
+    transform: scale(1);
     opacity: 0.5;
   }
 }

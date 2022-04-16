@@ -20,24 +20,19 @@ export class ScorePageComponent implements OnInit {
     this.timeToAnswer = 12;
   }
 
-  ngOnInit(): void {
+  ngOnInit(): any {
     this.dataCorrect = localStorage.getItem('correctData');
     console.log(this.dataCorrect);
     this.dataIncorrect = localStorage.getItem('incorrectData');
     console.log(this.dataIncorrect);
-
     this.timeToAnswer = localStorage.getItem('countdown');
     console.log(this.timeToAnswer);
 
-    if (this.timeToAnswer < 1) {
-      this.isTimeUp = true;
-    } else if (this.timeToAnswer > 6 && !this.dataIncorrect) {
-      this.score = this.dataCorrect * 10;
-      console.log('score6', this.score);
-    } else if (this.timeToAnswer < 6 && !this.dataIncorrect) {
-      this.score = this.dataCorrect * 5;
+    this.score =
+      (this.dataCorrect - this.dataIncorrect) * this.timeToAnswer * 100;
 
-      console.log('score5', this.score);
+    if (this.score < 0) {
+      this.score = 0;
     }
   }
 

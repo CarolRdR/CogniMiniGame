@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { SelectImageService } from 'src/app/services/select-image.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-game-page',
+
   templateUrl: './game-page.component.html',
   styleUrls: ['./game-page.component.scss'],
 })
@@ -18,8 +20,9 @@ export class GamePageComponent implements OnInit {
   images: string[] = [];
   theme: string = '';
   errorMessage = '';
-  correctImages: any;
-  incorrectImages: any;
+  isClicked: boolean;
+  correctImages: string[] = [];
+  incorrectImages: string[] = [];
   counter: any;
 
   constructor(
@@ -27,7 +30,10 @@ export class GamePageComponent implements OnInit {
     public store: StoreService,
     public route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.counter = 12;
+    this.isClicked = false;
+  }
 
   ngOnInit(): void {
     const themes = JSON.parse(localStorage.getItem('savedThemes') || '{}');
@@ -71,13 +77,12 @@ export class GamePageComponent implements OnInit {
     let retrievedInput = ev.target.alt;
 
     if (retrievedInput === this.themeToShow) {
-      this.correctImages.push(retrievedInput);
-
-      localStorage.setItem('correctData', this.correctImages.length);
+      let correctInput: any = this.correctImages.push(retrievedInput);
+      localStorage.setItem('correctData', correctInput);
     } else if (retrievedInput !== this.themeToShow) {
-      this.incorrectImages.push(retrievedInput);
+      let incorrectInput: any = this.incorrectImages.push(retrievedInput);
 
-      localStorage.setItem('incorrectData', this.incorrectImages.length);
+      localStorage.setItem('incorrectData', incorrectInput);
     }
   }
 

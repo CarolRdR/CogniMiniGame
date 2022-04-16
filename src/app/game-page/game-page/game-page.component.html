@@ -15,11 +15,8 @@
 
   <div class="game-image-grid">
     <div *ngFor="let image of imageList | slice:0:16" class="game-image-grid__item">
-      <!-- <form [formGroup]="imagesForm"> -->
       <img type="image" id="image" [alt]="image[1] === undefined ? image [2] : image[1] === this.theme1 ? image[1] : image[1] === this.theme2 ? image[1] :
           image[2]" [src]="image[0]" class="game-image-grid__image" (click)="selectImages($event)">
-      <!-- formControlName="images" -->
-      <!-- </form> -->
     </div>
 
   </div>
