@@ -126,13 +126,13 @@ svg circle {
 
 @media screen and (min-width: 600px) {
   h1 {
-    margin-top: 5rem;
-    font-size: 4rem;
+    margin-top: 2.2rem;
+    font-size: 3rem;
     color: rgb(240, 187, 40);
   }
   p {
-    margin-top: 2rem;
-    font-size: 4rem;
+    margin-top: 1rem;
+    font-size: 3rem;
     font-weight: bold;
   }
 
@@ -140,6 +140,7 @@ svg circle {
     & button {
       padding: 1rem 6rem 1rem 6rem;
       font-size: 1.3rem;
+      margin-bottom: 2rem;
     }
     & button:focus {
       border: 3px solid #7c7ccf;
@@ -161,8 +162,8 @@ svg circle {
     justify-content: center;
     max-width: 100%;
     max-height: 100%;
-    margin-top: 8rem;
-    margin-bottom: 5rem;
+    margin-top: 2rem;
+    margin-bottom: 2.2rem;
     grid-template-columns: 14vw 14vw 14vw 14vw;
     grid-template-rows: 12vw 12vw 12vw 12vw;
 
