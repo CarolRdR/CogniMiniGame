@@ -68,30 +68,30 @@ p {
     color: rgb(240, 187, 40);
   }
   p {
-    padding: 10rem;
-    margin-left: 10rem;
-    margin-right: 10rem;
-    font-size: 3rem;
+    padding: 1rem;
+    margin-left: 7rem;
+    margin-right: 7rem;
+    font-size: 2rem;
   }
 
   .welcome-words-choice {
     margin-top: 2rem;
     & input {
       margin-top: 3rem;
-      padding: 4rem;
+
       font-size: 2rem;
     }
     & h2 {
-      font-size: 3rem;
+      font-size: 2rem;
     }
   }
   .button-container {
-    padding: 9rem;
+    padding: 3rem;
   }
 
   .welcome-words-send {
-    padding: 2rem 7rem 2rem 7rem;
-    font-size: 2rem;
+    padding: 1rem 6rem 1rem 6rem;
+    font-size: 1.3rem;
   }
   .welcome-words-send:hover {
     cursor: pointer;
