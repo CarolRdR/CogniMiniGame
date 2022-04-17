@@ -48,7 +48,39 @@ h1 {
     font-weight: bold;
   }
   & button:focus {
-    border: 3px solid green;
-    opacity: 2;
+    border: 3px solid #7c7ccf;
+    opacity: 0.8;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  h1 {
+    margin-top: 20rem;
+    font-size: 10rem;
+    color: rgb(240, 187, 40);
+  }
+  .score-points {
+    padding: 7rem;
+    font-size: 7rem;
+  }
+  .button-container {
+    & button {
+      padding: 4rem 15rem 4rem 15rem;
+      font-size: 5rem;
+    }
+    & button:focus {
+      border: 3px solid #7c7ccf;
+      box-shadow: #39393f;
+      opacity: 0.8;
+    }
+    & button:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
+    & button:hover {
+      background-color: #eecb73;
+      box-shadow: 0 2px rgb(83, 83, 83);
+      transform: translateY(4px);
+    }
   }
 }

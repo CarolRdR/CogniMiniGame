@@ -48,8 +48,6 @@ p {
     padding: 2rem;
     font-size: 1.5rem;
     color: rgb(240, 187, 40);
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
 }
 .button-container {
@@ -61,4 +59,51 @@ p {
   background-color: rgb(240, 187, 40);
   border: none;
   font-weight: bold;
+}
+
+@media screen and (min-width: 600px) {
+  h1 {
+    margin-top: 20rem;
+    font-size: 10rem;
+    color: rgb(240, 187, 40);
+  }
+  p {
+    padding: 10rem;
+    margin-left: 30rem;
+    margin-right: 30rem;
+    font-size: 5rem;
+  }
+
+  .welcome-words-choice {
+    margin-top: 5rem;
+    & input {
+      margin-top: 6rem;
+      padding: 4rem;
+      font-size: 4rem;
+    }
+    & h2 {
+      font-size: 6rem;
+    }
+  }
+  .button-container {
+    padding: 9rem;
+  }
+
+  .welcome-words-send {
+    padding: 4rem 15rem 4rem 15rem;
+    font-size: 5rem;
+  }
+  .welcome-words-send:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  .welcome-words-send:focus {
+    opacity: 0.9;
+    box-shadow: #39393f;
+  }
+  .welcome-words-send:active {
+    background-color: #eecb73;
+    box-shadow: 0 2px rgb(83, 83, 83);
+    transform: translateY(4px);
+  }
 }
