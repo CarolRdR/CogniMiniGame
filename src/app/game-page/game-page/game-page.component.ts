@@ -68,7 +68,7 @@ export class GamePageComponent implements OnInit {
       this.counter = this.counter - 1;
       if (this.counter === 0) {
         clearInterval(interval);
-        // this.router.navigate([`score`]);
+        this.router.navigate([`score`]);
       }
     }, 1000);
   }
