@@ -59,11 +59,10 @@ describe('WelcomePageComponent', () => {
       expect(component.selectImage.getImages).toHaveBeenCalled();
     });
   });
-  describe('selectWords1 to have been called', () => {
+  describe('selectWords1 not to have been called', () => {
     const event1 = { target: { value: '' } };
     const event2 = { target: { value: '' } };
     it('should be invalid', async () => {
-      localStorage.setItem('token', '12345');
       mockSelectWordsService.getImages.and.returnValue(of([]));
 
       fixture.detectChanges();
@@ -72,21 +71,6 @@ describe('WelcomePageComponent', () => {
 
       expect(component).toBeTruthy();
       expect(component.selectImage.getImages).not.toHaveBeenCalled();
-    });
-  });
-  describe('setImage from store', () => {
-    it('returns an image list', async () => {
-      mockStoreService.setImage.and.returnValue(of({}));
-      component.themeForm.setValue({
-        theme1: 'cat',
-        theme2: 'dog',
-      });
-      fixture.detectChanges();
-      component.sendInfo();
-
-      expect(component).toBeTruthy();
-      expect(component.store.setImage).toHaveBeenCalled();
-      expect(component.store.saveTheme).toHaveBeenCalled();
     });
   });
 });

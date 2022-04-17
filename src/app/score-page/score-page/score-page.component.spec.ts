@@ -27,6 +27,12 @@ describe('ScorePageComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  afterEach(() => {
+    localStorage.removeItem('savedThemes');
+    localStorage.removeItem('correctData');
+    localStorage.removeItem('incorrectData');
+    localStorage.removeItem('countdown');
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
