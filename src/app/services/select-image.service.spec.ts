@@ -26,13 +26,7 @@ describe('SelectImageService', () => {
     it('httpClient should be called', () => {
       const mockRes = [{}];
       const theme1 = 'cat';
-      const theme2 = 'dog';
-
       service.getImages(theme1).subscribe((response: any) => {
-        expect(response).not.toBe(null);
-        expect(JSON.stringify(response)).toEqual(JSON.stringify(mockRes));
-      });
-      service.getImages(theme2).subscribe((response: any) => {
         expect(response).not.toBe(null);
         expect(JSON.stringify(response)).toEqual(JSON.stringify(mockRes));
       });
@@ -41,19 +35,34 @@ describe('SelectImageService', () => {
         method: 'GET',
         url: `https://api.unsplash.com/search/photos?query=${theme1}&per_page=15&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`,
       });
+
+      expect(req1.request.url).toBe(
+        `https://api.unsplash.com/search/photos?query=${theme1}&per_page=15&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`
+      );
+
+      req1.flush(mockRes);
+    });
+  });
+  describe('When search is called', () => {
+    it('httpClient should be called', () => {
+      const mockRes = [{}];
+
+      const theme2 = 'dog';
+
+      service.getImages(theme2).subscribe((response: any) => {
+        expect(response).not.toBe(null);
+        expect(JSON.stringify(response)).toEqual(JSON.stringify(mockRes));
+      });
+
       const req2 = httpTestingController.expectOne({
         method: 'GET',
         url: `https://api.unsplash.com/search/photos?query=${theme2}&per_page=15&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`,
       });
 
-      expect(req1.request.url).toBe(
-        `https://api.unsplash.com/search/photos?query=${theme1}&per_page=15&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`
-      );
       expect(req2.request.url).toBe(
         `https://api.unsplash.com/search/photos?query=${theme2}&per_page=15&client_id=MKLrI3iUoQdrH-IDniebI-1uJ2yh0LWM1ezPIsvN36k`
       );
 
-      req1.flush(mockRes);
       req2.flush(mockRes);
     });
   });

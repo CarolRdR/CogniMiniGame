@@ -10,9 +10,6 @@ const httpOptions = {
     Authorization: 'Client-ID ' + apiKey,
     'Content-Type': 'application/json',
   }),
-  // observe: 'response',
-  // params: 'HttpParams',
-  // responseType: 'json',
 };
 
 @Injectable({
