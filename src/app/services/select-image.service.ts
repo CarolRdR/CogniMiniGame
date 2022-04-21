@@ -17,6 +17,7 @@ const httpOptions = {
 })
 export class SelectImageService {
   images = [];
+  errorMessage = '';
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +30,7 @@ export class SelectImageService {
     const dataTheme1 = this.http.get(URL_THEME1, httpOptions).pipe(
       map((data: any) => {
         const imageData = data?.results;
+        console.log(imageData);
 
         return imageData?.map((item: any) => {
           return [item.urls.small, item.tags[0]?.title, item.tags[1]?.title];
@@ -52,7 +54,12 @@ export class SelectImageService {
 
     const merged = forkJoin(mergedData);
     merged.subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        this.errorMessage = error;
+      },
     });
 
     return forkJoin(mergedData);
