@@ -30,7 +30,6 @@ export class SelectImageService {
     const dataTheme1 = this.http.get(URL_THEME1, httpOptions).pipe(
       map((data: any) => {
         const imageData = data?.results;
-        console.log(imageData);
 
         return imageData?.map((item: any) => {
           return [item.urls.small, item.tags[0]?.title, item.tags[1]?.title];
