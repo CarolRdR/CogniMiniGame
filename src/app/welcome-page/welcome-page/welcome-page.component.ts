@@ -43,6 +43,7 @@ export class WelcomePageComponent implements OnInit {
 
     this.selectImage.getImages(this.themeForm.value).subscribe((data: any) => {
       let mergedData = [].concat.apply([], data);
+
       this.imageList = mergedData;
     });
   }
