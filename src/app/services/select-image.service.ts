@@ -50,13 +50,10 @@ export class SelectImageService {
     mergedData.push(dataTheme1);
     mergedData.push(dataTheme2);
 
-    // forkJoin(mergedData)
-    //   .pipe(
-    //     map((data) => data.reduce((result, arr) => [...result, ...arr], []))
-    //   )
-    //   .subscribe((data) => {
-    //     this.images = data;
-    //   });
+    const merged = forkJoin(mergedData);
+    merged.subscribe({
+      next: (data) => console.log(data),
+    });
 
     return forkJoin(mergedData);
   }
