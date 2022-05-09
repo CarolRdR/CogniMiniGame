@@ -10,14 +10,14 @@ import { StoreService } from 'src/app/services/store.service';
   styleUrls: ['./welcome-page.component.scss'],
 })
 export class WelcomePageComponent implements OnInit {
-  @Input() themeToShow!: string | undefined;
+  @Input() themeToShow!: string;
   @Input()
   required!: boolean | string;
 
   themeForm!: FormGroup;
   imageList: string[] = [];
   errorMessage = '';
-  nameImage: string = '';
+  nameImage = '';
 
   constructor(
     private router: Router,
@@ -42,7 +42,7 @@ export class WelcomePageComponent implements OnInit {
     }
 
     this.selectImage.getImages(this.themeForm.value).subscribe((data: any) => {
-      let mergedData = [].concat.apply([], data);
+      let mergedData = [].concat.apply([], data); // [...data]
       this.imageList = mergedData;
     });
   }

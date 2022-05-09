@@ -20,7 +20,7 @@ export class GamePageComponent implements OnInit {
   images: string[] = [];
   theme: string = '';
   errorMessage = '';
-  isClicked: boolean;
+  isClicked!: boolean;
   correctImages: string[] = [];
   incorrectImages: string[] = [];
   counter: any;
@@ -30,13 +30,12 @@ export class GamePageComponent implements OnInit {
     public store: StoreService,
     public route: ActivatedRoute,
     private router: Router
-  ) {
-    this.counter = 12;
-    this.isClicked = false;
-  }
+  ) {}
 
   ngOnInit(): void {
     const themes = JSON.parse(localStorage.getItem('savedThemes') || '{}');
+    this.counter = 12;
+    this.isClicked = false;
     this.theme1 = themes.theme1;
     this.theme2 = themes.theme2;
     this.themeToShow = this.theme1;
@@ -47,10 +46,10 @@ export class GamePageComponent implements OnInit {
 
           .filter(
             (item: any) =>
-              item?.[1] === this.theme1 ||
-              item?.[2] === this.theme1 ||
-              item?.[1] === this.theme2 ||
-              item?.[2] === this.theme2
+              item[1] === this.theme1 ||
+              item[2] === this.theme1 ||
+              item[1] === this.theme2 ||
+              item[2] === this.theme2
           )
           .sort(function () {
             return Math.random() - 0.5;

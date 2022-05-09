@@ -10,23 +10,22 @@ import { StoreService } from 'src/app/services/store.service';
 export class ScorePageComponent implements OnInit {
   score!: number;
   isTimeUp: boolean;
-  timeToAnswer: any;
-  dataCorrect!: any;
-  dataIncorrect!: any;
+  timeToAnswer!: number;
+  dataCorrect!: number;
+  dataIncorrect!: number;
   errorMessage = '';
 
   constructor(private router: Router, public store: StoreService) {
     this.isTimeUp = false;
-    this.timeToAnswer = 12;
   }
 
   ngOnInit(): any {
-    this.dataCorrect = localStorage.getItem('correctData');
-    this.dataIncorrect = localStorage.getItem('incorrectData');
-    this.timeToAnswer = localStorage.getItem('countdown');
+    this.dataCorrect = Number(localStorage.getItem('correctData'));
+    this.dataIncorrect = Number(localStorage.getItem('incorrectData'));
+    this.timeToAnswer = Number(localStorage.getItem('countdown'));
 
     this.score =
-      (this.dataCorrect - this.dataIncorrect) * this.timeToAnswer * 100;
+      (this.dataCorrect - this.dataIncorrect) * +this.timeToAnswer * 100;
 
     if (this.score < 0) {
       this.score = 0;
